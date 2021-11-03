@@ -45,22 +45,15 @@ const games = [];
  */
 function playRound(player) {
   let computer = computerPlay();
-  console.log(computer);
-  console.log(player)
-  // Komumst að því hvað tölva spilaði og athugum stöðu leiks
-
   let result = checkGame(player, computer);
-
 
   if (result > 0) {
     playerWins++;
-    // currentRound++;
   }
   else if (result < 0) {
     computerWins++
-    // currentRound++
   }
-  // Uppfærum result glugga áður en við sýnum, hér þarf að importa falli
+
   updateResultScreen({
     player: player.toString(),
     computer,
@@ -74,10 +67,12 @@ function playRound(player) {
   if (result !== 0) {
     currentRound++;
   }
-  // Uppfærum teljara ef ekki jafntefli, verðum að gera eftir að við setjum titil
+
+
   let next = document.querySelector('button.nextRound');
   let finish = document.querySelector('button.finishGame');
-  // Ákveðum hvaða takka skuli sýna
+
+
   if (computerWins > totalRounds / 2
     || playerWins > totalRounds / 2
     || currentRound > totalRounds) {
@@ -89,7 +84,6 @@ function playRound(player) {
     next.classList.remove('hidden');
   }
 
-  // Sýnum niðurstöðuskjá
   show('result');
 }
 
@@ -101,8 +95,8 @@ function round(e) {
   totalRounds = Number.parseInt(e.target.innerText);
   currentRound = 1;
   show('play');
-  // TODO útfæra
 }
+
 
 show('start');
 
@@ -113,10 +107,9 @@ document
 
 // Búum til takka
 createButtons(MAX_BEST_OF, round);
-// createButtons(MAX_BEST_OF, round);
+
 
 // Event listeners fyrir skæri, blað, steinn takka
-// TODO
 document
   .querySelector('button.scissor')
   .addEventListener('click', () => playRound(1));
@@ -143,12 +136,7 @@ function finishGame() {
   )
 
   if (playerWins > computerWins) totalWins++;
-
-  // Bætum við nýjasta leik
   updateGamesScreen(games.length, totalWins, playerWins, computerWins);
-  // Uppfærum stöðu
-
-  // Bætum leik við lista af spiluðum leikjum
 
   // Núllstillum breytur
   totalRounds = 0;
@@ -163,4 +151,3 @@ function finishGame() {
 // Næsta umferð og ljúka leik takkar
 document.querySelector('button.finishGame').addEventListener('click', finishGame);
 document.querySelector('button.nextRound').addEventListener('click', () => show('play'));
-// TODO takki sem fer með í næstu umferð
